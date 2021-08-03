@@ -9,9 +9,10 @@ This file is part of the Contao Address Verification extension.
 EOF;
 
 $finder = PhpCsFixer\Finder::create()
-    ->exclude('Resources/contao/templates')
+    ->exclude('templates')
     ->in([
         __DIR__.'/src',
+        __DIR__.'/contao',
     ])
 ;
 

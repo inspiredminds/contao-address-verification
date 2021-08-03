@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Contao Bayern Portal extension.
+ * This file is part of the Contao Address Verification extension.
  *
  * (c) inspiredminds
  *
