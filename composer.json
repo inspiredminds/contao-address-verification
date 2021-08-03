@@ -1,0 +1,43 @@
+{
+    "name": "inspiredminds/contao-address-verification",
+    "description": "Contao extension to provide an automatic address verification module.",
+    "type": "contao-bundle",
+    "homepage": "https://github.com/inspiredminds/contao-address-verification",
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Fritz Michael Gschwantner",
+            "homepage": "http://www.inspiredminds.at",
+            "email": "fmg@inspiredminds.at",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/inspiredminds/contao-address-verification/issues",
+        "source": "https://github.com/inspiredminds/contao-address-verification"
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/fritzmg"
+        }
+    ],
+    "require": {
+        "php": "^7.2 || ^8.0",
+        "contao/core-bundle": "^4.9",
+        "symfony/config": "^4.4 || ^5.2",
+        "symfony/dependency-injection": "^4.4 || ^5.2",
+        "symfony/http-kernel": "^4.4 || ^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "InspiredMinds\\ContaoAddressVerification\\": "src/"
+        }
+    },
+    "extra": {
+        "contao-manager-plugin": "InspiredMinds\\ContaoAddressVerification\\ContaoManager\\Plugin"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16"
+    }
+}
