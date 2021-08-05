@@ -1,5 +1,43 @@
 <?php $this->extend('block_unsearchable'); ?>
 
 <?php $this->block('content'); ?>
-  <p><?= $this->getName() ?></p>
+  <?= $this->form ?>
+  <script>window.autoComplete || document.write('<script src="bundles/contaoaddressverification/autoComplete.min.js">\x3C/script>')</script>
+  <script>
+    (function(){
+      'use strict';
+      const form = document.querySelector('.hasteform_<?= $this->formId ?>');
+      const autocomplete = new autoComplete({
+        selector: () => {
+          return form.querySelector('input[name="street"]');
+        },
+        data: {
+          src: <?= json_encode($this->addresses) ?>,
+          keys: ['address']
+        },
+        resultItem: {
+          highlight: {
+            render: true
+          }
+        },
+        events: {
+          input: {
+            selection: (event) => {
+              const selection = event.detail.selection.value;
+              form.querySelector('input[name="street"]').value = selection.street;
+              form.querySelector('input[name="number"]').value = selection.number;
+              form.querySelector('input[name="apartment"]').value = selection.apartment;
+              form.querySelector('input[name="postal"]').value = selection.postal;
+              form.querySelector('input[name="city"]').value = selection.city;
+
+              const country = form.querySelector('select[name="country"]');
+              if (null !== country) {
+                country.value = selection.country
+              }
+            }
+          }
+        }
+      });
+    })();
+  </script>
 <?php $this->endblock(); ?>

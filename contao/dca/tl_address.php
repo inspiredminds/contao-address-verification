@@ -77,6 +77,12 @@ $GLOBALS['TL_DCA']['tl_address'] = [
             'eval' => ['tl_class' => 'w50', 'maxlength' => 255, 'mandatory' => true],
             'sql' => ['type' => 'string', 'length' => 255, 'default' => ''],
         ],
+        'apartment' => [
+            'search' => true,
+            'inputType' => 'text',
+            'eval' => ['tl_class' => 'w50', 'maxlength' => 255],
+            'sql' => ['type' => 'string', 'length' => 255, 'default' => ''],
+        ],
         'postal' => [
             'search' => true,
             'filter' => true,
@@ -90,7 +96,7 @@ $GLOBALS['TL_DCA']['tl_address'] = [
             'filter' => true,
             'flag' => 1,
             'inputType' => 'text',
-            'eval' => ['tl_class' => 'w50', 'maxlength' => 255, 'mandatory' => true],
+            'eval' => ['tl_class' => 'w50', 'maxlength' => 255],
             'sql' => ['type' => 'string', 'length' => 255, 'default' => ''],
         ],
         'country' => [
@@ -104,6 +110,6 @@ $GLOBALS['TL_DCA']['tl_address'] = [
         ],
     ],
     'palettes' => [
-        'default' => '{address_legend},street,number,postal,city,country',
+        'default' => '{address_legend},street,number,apartment,postal,city,country',
     ],
 ];

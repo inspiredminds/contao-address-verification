@@ -21,4 +21,11 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['address_groups'] = [
     'relation' => ['type' => 'hasMany', 'load' => 'lazy'],
 ];
 
-$GLOBALS['TL_DCA']['tl_module']['palettes'][AddressVerificationController::TYPE] = '{title_legend},name,headline,type;{address_verification_legend},address_groups;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID';
+$GLOBALS['TL_DCA']['tl_module']['fields']['address_country'] = [
+    'inputType' => 'checkbox',
+    'exclude' => true,
+    'eval' => ['tl_class' => 'w50'],
+    'sql' => ['type' => 'boolean', 'default' => false],
+];
+
+$GLOBALS['TL_DCA']['tl_module']['palettes'][AddressVerificationController::TYPE] = '{title_legend},name,headline,type;{address_verification_legend},address_groups,address_country;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID';

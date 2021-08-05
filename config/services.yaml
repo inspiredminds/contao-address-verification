@@ -5,4 +5,4 @@ services:
     
     InspiredMinds\ContaoAddressVerification\:
         resource: ../src
-        exclude: ../src/{ContaoManager,Resources}
+        exclude: ../src/{ContaoManager,Event,Model,Resources}
