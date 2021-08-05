@@ -38,6 +38,10 @@ $GLOBALS['TL_DCA']['tl_address'] = [
                 'href' => 'act=edit',
                 'icon' => 'edit.svg',
             ],
+            'copy' => [
+                'href' => 'act=paste&amp;mode=copy',
+                'icon' => 'copy.svg',
+            ],
             'delete' => [
                 'href' => 'act=delete',
                 'icon' => 'delete.svg',

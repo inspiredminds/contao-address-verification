@@ -4,5 +4,5 @@ services:
         autoconfigure: true
     
     InspiredMinds\ContaoAddressVerification\:
-        resource: ../../
-        exclude: ../../{ContaoManager,Resources}
+        resource: ../src
+        exclude: ../src/{ContaoManager,Resources}
