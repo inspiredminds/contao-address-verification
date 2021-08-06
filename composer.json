@@ -28,7 +28,8 @@
         "contao/core-bundle": "^4.9",
         "symfony/config": "^4.4 || ^5.2",
         "symfony/dependency-injection": "^4.4 || ^5.2",
-        "symfony/http-kernel": "^4.4 || ^5.2"
+        "symfony/http-kernel": "^4.4 || ^5.2",
+        "terminal42/contao-node": "^1.4"
     },
     "autoload": {
         "psr-4": {
