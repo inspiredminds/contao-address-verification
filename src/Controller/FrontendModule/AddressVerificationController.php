@@ -83,7 +83,7 @@ class AddressVerificationController extends AbstractFrontendModuleController
                 }
             }
         } else {
-            $template->form = $form->generate();
+            $template->form = $form->generate('form_address_verification');
             $template->formId = $this->getFormId($module);
             $template->addresses = $this->getAddresses($module);
         }

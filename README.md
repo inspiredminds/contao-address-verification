@@ -43,4 +43,12 @@ The _Address verification_ module provides an `InspiredMinds\ContaoAddressVerifi
 
 ## Autocompletion
 
-This extension integrates [autoComplete.js](https://tarekraafat.github.io/autoComplete.js/) for autocompletion, but does not integrate any of its CSS styles by default, as you need to take care of styling yourself. As a starting point you could download the _autoComplete.js_ package and use one of its stylesheets for your own purposes. If you want to customize the JavaScript itself or the initialisation of the script, create your own `mod_address_verification` template.
+This extension integrates [autoComplete.js](https://tarekraafat.github.io/autoComplete.js/) for autocompletion, but does not integrate any of its CSS styles by default, as you need to take care of styling yourself. As a starting point you could download the _autoComplete.js_ package and use one of its stylesheets for your own purposes. The stylesheets are also present under `web/bundles/contaoaddressverification/css/`, so you could also add the following code to a custom `mod_address_verification` template (or elsewhere):
+
+```php
+// templates/mod_address_verification.html5
+$GLOBALS['TL_CSS'][] = 'bundles/contaoaddressverification/css/autoComplete.02.css';
+$this->extend('mod_address_verification');
+```
+
+Likewise, if you want to customize the JavaScript itself or the initialisation of the script, create your own copy of the `mod_address_verification` template and modify the JavaScript accordingly.
