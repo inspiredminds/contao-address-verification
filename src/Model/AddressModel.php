@@ -46,14 +46,14 @@ class AddressModel extends Model
                 $this->street,
                 implode('/', array_filter([
                     $this->number,
-                    $this->apartment
+                    $this->apartment,
                 ])),
             ])),
             implode(' ', array_filter([
                 $this->postal,
-                $this->city
+                $this->city,
             ])),
-            $includeCountry ? System::getCountries()[$this->country] : null
+            $includeCountry ? System::getCountries()[$this->country] : null,
         ]));
     }
 }

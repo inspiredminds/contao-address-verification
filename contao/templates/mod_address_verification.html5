@@ -1,43 +1,56 @@
 <?php $this->extend('block_unsearchable'); ?>
 
 <?php $this->block('content'); ?>
-  <?= $this->form ?>
-  <script>window.autoComplete || document.write('<script src="bundles/contaoaddressverification/autoComplete.min.js">\x3C/script>')</script>
-  <script>
-    (function(){
-      'use strict';
-      const form = document.querySelector('.hasteform_<?= $this->formId ?>');
-      const autocomplete = new autoComplete({
-        selector: () => {
-          return form.querySelector('input[name="street"]');
-        },
-        data: {
-          src: <?= json_encode($this->addresses) ?>,
-          keys: ['address']
-        },
-        resultItem: {
-          highlight: {
-            render: true
-          }
-        },
-        events: {
-          input: {
-            selection: (event) => {
-              const selection = event.detail.selection.value;
-              form.querySelector('input[name="street"]').value = selection.street;
-              form.querySelector('input[name="number"]').value = selection.number;
-              form.querySelector('input[name="apartment"]').value = selection.apartment;
-              form.querySelector('input[name="postal"]').value = selection.postal;
-              form.querySelector('input[name="city"]').value = selection.city;
+  <?php if ($this->form): ?>
+    <?= $this->form ?>
+    <script>window.autoComplete || document.write('<script src="bundles/contaoaddressverification/autoComplete.min.js">\x3C/script>')</script>
+    <script>
+      (function(){
+        'use strict';
+        const form = document.querySelector('.hasteform_<?= $this->formId ?>');
+        const autocomplete = new autoComplete({
+          selector: () => {
+            return form.querySelector('input[name="street"]');
+          },
+          data: {
+            src: <?= json_encode($this->addresses) ?>,
+            keys: ['address']
+          },
+          resultItem: {
+            highlight: {
+              render: true
+            }
+          },
+          events: {
+            input: {
+              selection: (event) => {
+                const selection = event.detail.selection.value;
+                form.querySelector('input[name="street"]').value = selection.street;
+                form.querySelector('input[name="number"]').value = selection.number;
+                form.querySelector('input[name="apartment"]').value = selection.apartment;
+                form.querySelector('input[name="postal"]').value = selection.postal;
+                form.querySelector('input[name="city"]').value = selection.city;
 
-              const country = form.querySelector('select[name="country"]');
-              if (null !== country) {
-                country.value = selection.country
+                const country = form.querySelector('select[name="country"]');
+                if (null !== country) {
+                  country.value = selection.country
+                }
               }
             }
           }
-        }
-      });
-    })();
-  </script>
+        });
+      })();
+    </script>
+  <?php else: ?>
+    <?php if ($this->nodes): ?>
+      <div class="verification-content">
+        <?= implode("\n", $this->nodes) ?>
+      </div>
+    <?php endif; ?>
+    <?php if ($this->groupNodes): ?>
+      <div class="verification-group-content">
+        <?= implode("\n", $this->groupNodes) ?>
+      </div>
+    <?php endif; ?>
+  <?php endif; ?>
 <?php $this->endblock(); ?>

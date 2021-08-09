@@ -10,6 +10,12 @@ declare(strict_types=1);
  * @license LGPL-3.0-or-later
  */
 
+use Contao\Controller;
+use Contao\System;
+
+Controller::loadDataContainer('tl_content');
+System::loadLanguageFile('tl_content');
+
 $GLOBALS['TL_DCA']['tl_address_group'] = [
     'config' => [
         'dataContainer' => 'Table',
@@ -67,6 +73,9 @@ $GLOBALS['TL_DCA']['tl_address_group'] = [
         ],
     ],
     'palettes' => [
-        'default' => '{address_group_legend},name',
+        'default' => '{address_group_legend},name;{address_group_content_legend},nodes',
     ],
 ];
+
+$GLOBALS['TL_DCA']['tl_address_group']['fields']['nodes'] = &$GLOBALS['TL_DCA']['tl_content']['fields']['nodes'];
+$GLOBALS['TL_DCA']['tl_address_group']['fields']['nodes']['eval']['mandatory'] = false;

@@ -11,5 +11,7 @@ declare(strict_types=1);
  */
 
 $GLOBALS['TL_LANG']['tl_module']['address_verification_legend'] = 'Address verification';
+$GLOBALS['TL_LANG']['tl_module']['address_verified_legend'] = 'Address verification: verified';
+$GLOBALS['TL_LANG']['tl_module']['address_unverified_legend'] = 'Address verification: unverified';
 $GLOBALS['TL_LANG']['tl_module']['address_groups'] = ['Address groups', 'Choose the address groups against which addresses should the entered address be checked against.'];
 $GLOBALS['TL_LANG']['tl_module']['address_country'] = ['Include country', 'Includes the country for the address input.'];

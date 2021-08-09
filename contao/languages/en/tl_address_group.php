@@ -12,4 +12,5 @@ declare(strict_types=1);
 
 $GLOBALS['TL_LANG']['tl_address_group']['new'] = ['Create new address group', 'Creates a new address group.'];
 $GLOBALS['TL_LANG']['tl_address_group']['address_group_legend'] = 'Address group';
+$GLOBALS['TL_LANG']['tl_address_group']['address_group_content_legend'] = 'Verified address content';
 $GLOBALS['TL_LANG']['tl_address_group']['name'] = ['Name', 'Name of the address group.'];

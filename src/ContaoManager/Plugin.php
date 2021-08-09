@@ -17,6 +17,7 @@ use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use InspiredMinds\ContaoAddressVerification\ContaoAddressVerificationBundle;
+use Terminal42\NodeBundle\Terminal42NodeBundle;
 
 class Plugin implements BundlePluginInterface
 {
@@ -24,7 +25,10 @@ class Plugin implements BundlePluginInterface
     {
         return [
             BundleConfig::create(ContaoAddressVerificationBundle::class)
-                ->setLoadAfter([ContaoCoreBundle::class]),
+                ->setLoadAfter([
+                    ContaoCoreBundle::class,
+                    Terminal42NodeBundle::class,
+                ]),
         ];
     }
 }
