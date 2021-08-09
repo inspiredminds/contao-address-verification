@@ -1,0 +1,19 @@
+{% extends "@ContaoCore/Backend/be_page.html.twig" %}
+
+{% block headline %}
+  <span>{{ 'Addresses'|trans }}</span> <span>{{ 'Import'|trans }}</span></h1>
+{% endblock %}
+
+{% block error %}
+{% endblock %}
+
+{% block main %}
+  <div id="tl_buttons">
+    <a href="{{ back }}" class="header_back">{{ 'MSC.goBack'|trans({}, 'contao_default') }}</a>
+  </div>
+  <div class="tl_listing_container">
+    <p>{{ 'The CSV file needs to have the following format. City or city and country can be optional.'|trans }}</p>
+    <pre><code>street,number,apartment,postal code,city,country</code></pre>
+  </div>
+  {{ form|raw }}
+{% endblock %}

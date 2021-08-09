@@ -10,7 +10,9 @@ declare(strict_types=1);
  * @license LGPL-3.0-or-later
  */
 
+use Contao\StringUtil;
 use Contao\System;
+use InspiredMinds\ContaoAddressVerification\Controller\Backend\AddressImportController;
 
 $GLOBALS['TL_DCA']['tl_address'] = [
     'config' => [
@@ -26,11 +28,11 @@ $GLOBALS['TL_DCA']['tl_address'] = [
     'list' => [
         'sorting' => [
             'mode' => 4,
-            'fields' => ['city'],
+            'fields' => ['street'],
             'headerFields' => ['name'],
             'panelLayout' => 'filter;search,limit',
             'child_record_callback' => function (array $row) {
-                return '<div class="tl_content_left">'.$row['street'].' '.$row['number'].', '.$row['postal'].' '.$row['city'].'</div>';
+                return '<div class="tl_content_left">'.$row['street'].' '.$row['number'].($row['apartment'] ? '/'.$row['apartment'] : '').', '.$row['postal'].' '.$row['city'].'</div>';
             },
         ],
         'operations' => [
@@ -49,6 +51,16 @@ $GLOBALS['TL_DCA']['tl_address'] = [
             'show' => [
                 'href' => 'act=show',
                 'icon' => 'show.svg',
+            ],
+        ],
+        'global_operations' => [
+            'import' => [
+                'icon' => 'tablewizard.svg',
+                'button_callback' => function (?string $href, string $label, string $title, string $class, string $attributes): string {
+                    $href = System::getContainer()->get('router')->generate(AddressImportController::class, ['groupId' => Input::get('id')]);
+
+                    return '<a href="'.$href.'" class="'.$class.'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.$label.'</a> ';
+                },
             ],
         ],
     ],

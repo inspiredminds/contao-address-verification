@@ -27,6 +27,7 @@
         "codefog/contao-haste": "^4.25",
         "contao/core-bundle": "^4.9",
         "inspiredminds/contao-backend-forms": "^0.3.3",
+        "league/csv": "^9.7",
         "symfony/config": "^4.4 || ^5.2",
         "symfony/dependency-injection": "^4.4 || ^5.2",
         "symfony/http-kernel": "^4.4 || ^5.2",
