@@ -40,3 +40,7 @@ Once a front end visitor has entered their address, a session will be started an
 ## Modify Form Event
 
 The _Address verification_ module provides an `InspiredMinds\ContaoAddressVerification\Event\BuildAddressVerificationFormEvent` event with which you can modify the form based on [`Haste\Form\Form`](https://github.com/codefog/contao-haste/blob/master/docs/Form/Form.md). You can use this event to add additional form fields or validators etc. to the form.
+
+## Autocompletion
+
+This extension integrates [autoComplete.js](https://tarekraafat.github.io/autoComplete.js/) for autocompletion, but does not integrate any of its CSS styles by default, as you need to take care of styling yourself. As a starting point you could download the _autoComplete.js_ package and use one of its stylesheets for your own purposes. If you want to customize the JavaScript itself or the initialisation of the script, create your own `mod_address_verification` template.
