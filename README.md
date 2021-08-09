@@ -16,6 +16,15 @@ Addresses are divided by _Address Groups_. Each address group has a name and you
 * City (_Note:_ only the postal code will be used for verification)
 * Country (can optionally be included in the verification)
 
+When editing an address group you also have the possibility to import addresses in bulk through a CSV file. The CSV file needs to have the following format:
+
+```
+street,number,apartment,postal code,city,country
+```
+
+The country, or city and country together, can be omitted from the CSV file.
+
+
 ## Front End Modules
 
 The extension currently provides two modules in total: one for the actual address verification and one module to automatically redirect to a redirect page, if no address verification session was started yet.
@@ -28,14 +37,6 @@ This module handles the actual address verification process and show the form as
 * __Include country:__ includes the country in the output of the front end form and includes is also for the verification process itself.
 * __Nodes:__ content to be shown for either a verified address or an unverified address.
 * __Redirect page:__ redirects to the defined page directly, instead of showing the nodes based content.
-
-When editing an address group you also have the possibility to import addresses in bulk through a CSV file. The CSV file needs to have the following format:
-
-```
-street,number,apartment,postal code,city,country
-```
-
-The country, or city and country together, can be omitted from the CSV file.
 
 ### Require address verification session
 
