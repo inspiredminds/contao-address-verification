@@ -29,7 +29,7 @@ This module handles the actual address verification process and show the form as
 * __Nodes:__ content to be shown for either a verified address or an unverified address.
 * __Redirect page:__ redirects to the defined page directly, instead of showing the nodes based content.
 
-### Require address verificatio nsession
+### Require address verification session
 
 This module provides a possibility to redirect to a defined page in the front end, if no address verification session was started yet, i.e. if the front end visitor did not enter an address via the _Address verification module_ yet. You can use this module to prevent access to certain pages in such a case.
 
