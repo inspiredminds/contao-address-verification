@@ -2,3 +2,4 @@ CSV file: CSV file
 Please choose the CSV file.: Please choose the CSV file.
 Import: Import
 Addresses: Addresses
+The CSV file needs to have the following format. Country, or city and country together, can be omitted.: The CSV file needs to have the following format. Country, or city and country together, can be omitted.
