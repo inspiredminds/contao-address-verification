@@ -33,7 +33,7 @@ The extension currently provides two modules in total: one for the actual addres
 This module handles the actual address verification process and show the form as well as the subsequent content in the front end. It provides the following settings:
 
 * __Address groups:__ addresses are grouped in the back end, similar to news archives for example. Select the address groups against which the entered address should be verified against.
-* __Include country:__ includes the country in the output of the front end form and includes is also for the verification process itself.
+* __Include country:__ includes the country in the output of the front end form and includes it also for the verification process itself.
 * __Nodes:__ content to be shown for either a verified address or an unverified address.
 * __Redirect page:__ redirects to the defined page directly, instead of showing the nodes based content.
 
