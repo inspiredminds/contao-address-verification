@@ -1,6 +1,6 @@
 {
     "name": "inspiredminds/contao-address-verification",
-    "description": "Contao extension to provide an automatic address verification module.",
+    "description": "Contao extension to provide an address verification module.",
     "type": "contao-bundle",
     "homepage": "https://github.com/inspiredminds/contao-address-verification",
     "license": "LGPL-3.0-or-later",

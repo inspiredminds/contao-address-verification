@@ -24,7 +24,6 @@ street,number,apartment,postal code,city,country
 
 The country, or city and country together, can be omitted from the CSV file.
 
-
 ## Front End Modules
 
 The extension currently provides two modules in total: one for the actual address verification and one module to automatically redirect to a redirect page, if no address verification session was started yet.
