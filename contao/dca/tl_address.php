@@ -91,7 +91,7 @@ $GLOBALS['TL_DCA']['tl_address'] = [
             'search' => true,
             'flag' => 1,
             'inputType' => 'text',
-            'eval' => ['tl_class' => 'w50', 'maxlength' => 255, 'mandatory' => true],
+            'eval' => ['tl_class' => 'w50 clr', 'maxlength' => 255, 'mandatory' => true],
             'sql' => ['type' => 'string', 'length' => 255, 'default' => ''],
         ],
         'number' => [
@@ -103,7 +103,7 @@ $GLOBALS['TL_DCA']['tl_address'] = [
         'apartment' => [
             'search' => true,
             'inputType' => 'text',
-            'eval' => ['tl_class' => 'w50', 'maxlength' => 255],
+            'eval' => ['tl_class' => 'w50 clr', 'maxlength' => 255],
             'sql' => ['type' => 'string', 'length' => 255, 'default' => ''],
         ],
         'postal' => [
@@ -111,7 +111,7 @@ $GLOBALS['TL_DCA']['tl_address'] = [
             'filter' => true,
             'flag' => 1,
             'inputType' => 'text',
-            'eval' => ['rgxp' => 'digit', 'tl_class' => 'w50', 'maxlength' => 255, 'mandatory' => true],
+            'eval' => ['rgxp' => 'digit', 'tl_class' => 'w50 clr', 'maxlength' => 255, 'mandatory' => true],
             'sql' => ['type' => 'string', 'length' => 255, 'default' => ''],
         ],
         'city' => [
@@ -125,7 +125,7 @@ $GLOBALS['TL_DCA']['tl_address'] = [
         'country' => [
             'filter' => true,
             'inputType' => 'select',
-            'eval' => ['includeBlankOption' => true, 'chosen' => true, 'tl_class' => 'w50'],
+            'eval' => ['includeBlankOption' => true, 'chosen' => true, 'tl_class' => 'w50 clr'],
             'options_callback' => static function () {
                 return System::getCountries();
             },
