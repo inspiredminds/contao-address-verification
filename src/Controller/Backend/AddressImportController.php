@@ -101,15 +101,15 @@ class AddressImportController
                 }
             }
 
-            $addressRecord = array_filter([
+            $addressRecord = [
                 'pid' => $groupId,
                 'street' => $record[0],
                 'number' => $record[1],
                 'apartment' => $record[2],
                 'postal' => $record[3],
-                'city' => $record[4] ?? null,
-                'country' => $country,
-            ]);
+                'city' => $record[4] ?? '',
+                'country' => $country ?? '',
+            ];
 
             $where = implode(' AND ', array_map(function ($value) {
                 return $value.' = ?';
