@@ -19,9 +19,11 @@ $GLOBALS['TL_DCA']['tl_address'] = [
         'dataContainer' => 'Table',
         'enableVersioning' => true,
         'ptable' => 'tl_address_group',
+        'markAsCopy' => 'number',
         'sql' => [
             'keys' => [
                 'id' => 'primary',
+                'pid,street,number,apartment,postal,city,country' => 'unique',
             ],
         ],
     ],
@@ -44,6 +46,10 @@ $GLOBALS['TL_DCA']['tl_address'] = [
                 'href' => 'act=paste&amp;mode=copy',
                 'icon' => 'copy.svg',
             ],
+            'cut' => [
+                'href' => 'act=paste&amp;mode=cut',
+                'icon' => 'cut.svg',
+            ],
             'delete' => [
                 'href' => 'act=delete',
                 'icon' => 'delete.svg',
@@ -61,6 +67,11 @@ $GLOBALS['TL_DCA']['tl_address'] = [
 
                     return '<a href="'.$href.'" class="'.$class.'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.$label.'</a> ';
                 },
+            ],
+            'all' => [
+                'href' => 'act=select',
+                'class' => 'header_edit_all',
+                'attributes' => 'onclick="Backend.getScrollOffset()" accesskey="e"',
             ],
         ],
     ],
