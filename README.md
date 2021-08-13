@@ -24,6 +24,8 @@ street,number,apartment,postal code,city,country
 
 The country, or city and country together, can be omitted from the CSV file.
 
+_Note:_ the country needs to be in the ISO 3166-1 Alpha-2 format, e.g. "at" for Austria, "de" for Germany, etc. (upper or lower case does not matter).
+
 ## Front End Modules
 
 The extension currently provides two modules in total: one for the actual address verification and one module to automatically redirect to a redirect page, if no address verification session was started yet.
