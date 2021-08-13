@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace InspiredMinds\ContaoAddressVerification\Controller\Backend;
 
+use Contao\System;
 use Doctrine\DBAL\Connection;
 use InspiredMinds\ContaoBackendFormsBundle\Form\BackendForm;
 use League\Csv\Reader;
@@ -87,8 +88,19 @@ class AddressImportController
     {
         /** @var Reader $csv */
         $csv = Reader::createFromPath($file, 'r');
+        $countries = array_keys(System::getCountries());
 
         foreach ($csv->getRecords() as $record) {
+            $country = $record[5] ?? null;
+
+            if (null !== $country) {
+                $country = strtolower($country);
+
+                if (!\in_array($country, $countries, true)) {
+                    $country = null;
+                }
+            }
+
             $addressRecord = array_filter([
                 'pid' => $groupId,
                 'street' => $record[0],
@@ -96,7 +108,7 @@ class AddressImportController
                 'apartment' => $record[2],
                 'postal' => $record[3],
                 'city' => $record[4] ?? null,
-                'country' => $record[5] ?? null,
+                'country' => $country,
             ]);
 
             $where = implode(' AND ', array_map(function ($value) {
