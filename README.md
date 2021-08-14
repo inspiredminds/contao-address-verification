@@ -7,7 +7,7 @@ The extension provides a module where front end visitors can enter their address
 
 ## Address Management
 
-Addresses are divided by _Address Groups_. Each address group has a name and you can also optionally define custom content via [nodes](https://github.com/terminal42/contao-node) that will be display when an address has been verified for the selected groups. Each address currently consists of the following properties:
+Addresses are divided by _Address Groups_. Each address group has a name and you can also optionally define custom content via [nodes](https://github.com/terminal42/contao-node) that will be displayed when an address has been verified for the selected groups. Each address currently consists of the following properties:
 
 * Street
 * Number (house number)
