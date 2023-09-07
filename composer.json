@@ -25,14 +25,14 @@
     "require": {
         "php": "^7.2 || ^8.0",
         "codefog/contao-haste": "^4.25",
-        "contao/core-bundle": "^4.9",
-        "inspiredminds/contao-backend-forms": "^0.3.3",
+        "contao/core-bundle": "^4.9 || ^5.0",
+        "inspiredminds/contao-backend-forms": "^0.3.3 || ^1.0",
         "league/csv": "^9.7",
-        "symfony/config": "^4.4 || ^5.2",
-        "symfony/dependency-injection": "^4.4 || ^5.2",
-        "symfony/http-foundation": "^4.4 || ^5.2",
-        "symfony/http-kernel": "^4.4 || ^5.2",
-        "symfony/routing": "^4.4 || ^5.2",
+        "symfony/config": "^4.4 || ^5.2 || ^6.1",
+        "symfony/dependency-injection": "^4.4 || ^5.2 || ^6.1",
+        "symfony/http-foundation": "^4.4 || ^5.2 || ^6.1",
+        "symfony/http-kernel": "^4.4 || ^5.2 || ^6.1",
+        "symfony/routing": "^4.4 || ^5.2 || ^6.1",
         "terminal42/contao-node": "^1.4"
     },
     "autoload": {
