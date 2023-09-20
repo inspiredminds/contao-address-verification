@@ -15,3 +15,4 @@ $GLOBALS['TL_LANG']['tl_module']['address_verified_legend'] = 'Adress-Verifikati
 $GLOBALS['TL_LANG']['tl_module']['address_unverified_legend'] = 'Adress-Verifikation: nicht verifiziert';
 $GLOBALS['TL_LANG']['tl_module']['address_groups'] = ['Adress-Gruppe', 'Wählen Sie die Adress-Gruppen aus, gegen die die Adresse verifiziert werden soll.'];
 $GLOBALS['TL_LANG']['tl_module']['address_country'] = ['Land einbeziehen', 'Zieht das Land in der Adress-Verifikation mit ein.'];
+$GLOBALS['TL_LANG']['tl_module']['address_show_only_verified_nodes'] = ['Nur verifizierte Nodes anzeigen', 'Limitiert die Ausgabe der Nodes auf die Gruppe, in der die Adresse gefunden wurde.'];

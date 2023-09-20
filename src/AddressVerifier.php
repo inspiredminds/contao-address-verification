@@ -63,8 +63,17 @@ class AddressVerifier
         $values[] = $addressGroupIds;
         $types[] = Connection::PARAM_INT_ARRAY;
 
-        $sql = 'SELECT COUNT(*) FROM tl_address WHERE '.implode(' AND ', $where);
+        $sql = 'SELECT * FROM tl_address WHERE '.implode(' AND ', $where);
 
-        return (int) $this->db->fetchOne($sql, $values, $types) > 0;
+        $record = $this->db->fetchAssociative($sql, $values, $types);
+
+        if (false === $record) {
+            return false;
+        }
+
+        $address->preventSaving(false);
+        $address->setRow($record);
+
+        return true;
     }
 }

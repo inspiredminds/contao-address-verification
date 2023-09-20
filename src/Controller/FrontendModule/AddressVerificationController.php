@@ -53,10 +53,11 @@ class AddressVerificationController extends AbstractFrontendModuleController
         $form = $this->buildForm($module, $request);
 
         if ($form->validate()) {
-            $this->setAddressSession($request, $form->getBoundModel());
+            $address = $form->getBoundModel();
+            $this->setAddressSession($request, $address);
 
             $addressGroupIds = array_map('\intval', StringUtil::deserialize($module->address_groups, true));
-            $verified = $this->verifier->verify($form->getBoundModel(), $addressGroupIds, (bool) $module->address_country);
+            $verified = $this->verifier->verify($address, $addressGroupIds, (bool) $module->address_country);
             $template->isVerified = $verified;
             $template->isUnverified = !$verified;
             $moduleVar = 'address_'.($verified ? 'verified' : 'unverified').'_';
@@ -71,16 +72,27 @@ class AddressVerificationController extends AbstractFrontendModuleController
             }
 
             if ($verified) {
-                $groupNodeIds = [];
+                $allGroupNodeIds = [];
+                $groupNodesMeta = [];
 
                 foreach ($addressGroupIds as $addressGroupId) {
                     $addressGroup = AddressGroupModel::findByPk($addressGroupId);
-                    $groupNodeIds = array_unique(array_merge($groupNodeIds, StringUtil::deserialize($addressGroup->nodes, true)));
+                    $groupNodeIds = StringUtil::deserialize($addressGroup->nodes, true);
+                    $allGroupNodeIds = array_unique(array_merge($allGroupNodeIds, $groupNodeIds));
+                    $verifiedGroup = (int) $address->pid === $addressGroupId;
+
+                    $groupNodesMeta[] = [
+                        'verified' => (int) $address->pid === $addressGroupId,
+                        'content' => implode("\n", $this->nodeManager->generateMultiple($groupNodeIds)),
+                        'class' => 'address-group-content address-group-content--'.$addressGroup->id.($verifiedGroup ? ' address-group-content--verified' : ''),
+                    ];
                 }
 
-                if (!empty($groupNodeIds)) {
-                    $template->groupNodes = $this->nodeManager->generateMultiple($groupNodeIds);
+                if (!empty($allGroupNodeIds)) {
+                    $template->groupNodes = $this->nodeManager->generateMultiple($allGroupNodeIds);
                 }
+
+                $template->groupNodesMeta = $groupNodesMeta;
             }
         } else {
             $template->form = $form->generate('form_address_verification');

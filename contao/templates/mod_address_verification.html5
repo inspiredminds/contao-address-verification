@@ -47,9 +47,14 @@
         <?= implode("\n", $this->nodes) ?>
       </div>
     <?php endif; ?>
-    <?php if ($this->groupNodes): ?>
+    <?php if ($this->groupNodesMeta): ?>
       <div class="verification-group-content">
-        <?= implode("\n", $this->groupNodes) ?>
+        <?php foreach ($this->groupNodesMeta as $groupNodes): ?>
+          <?php if ($this->address_show_only_verified_nodes && !$groupNodes['verified']) continue; ?>
+          <div class="<?= $groupNodes['class'] ?>">
+            <?= $groupNodes['content'] ?>
+          </div>
+        <?php endforeach; ?>
       </div>
     <?php endif; ?>
   <?php endif; ?>
