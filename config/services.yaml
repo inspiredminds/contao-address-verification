@@ -9,6 +9,6 @@ services:
         resource: ../src
         exclude: ../src/{ContaoManager,Event,Model,Resources}
 
-    InspiredMinds\ContaoAddressVerification\Controller\Backend\:
-        resource: ../src/Controller/Backend
+    InspiredMinds\ContaoAddressVerification\Controller\:
+        resource: ../src/Controller
         tags: ['controller.service_arguments']

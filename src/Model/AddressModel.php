@@ -39,8 +39,12 @@ class AddressModel extends Model
         return static::findBy($columns, null, $options);
     }
 
-    public function getReadableAddress(bool $includeCountry = false): string
+    public function getReadableAddress(bool $includeCountry = false, array $countries = []): string
     {
+        if ($includeCountry && !$countries) {
+            $countries = System::getCountries();
+        }
+
         return implode(', ', array_filter([
             implode(' ', array_filter([
                 $this->street,
@@ -53,7 +57,7 @@ class AddressModel extends Model
                 $this->postal,
                 $this->city,
             ])),
-            $includeCountry ? System::getCountries()[$this->country] : null,
+            $includeCountry ? ($countries[$this->country] ?? null) : null,
         ]));
     }
 }

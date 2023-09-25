@@ -13,8 +13,18 @@
             return form.querySelector('input[name="street"]');
           },
           data: {
-            src: <?= json_encode($this->addresses) ?>,
-            keys: ['address']
+            src: async () => {
+              try {
+                const source = await fetch('<?= $this->asyncUrl ?>');
+                const data = await source.json();
+
+                return data;
+              } catch (error) {
+                return error;
+              }
+            },
+            keys: ['address'],
+            cache: true
           },
           resultItem: {
             highlight: {

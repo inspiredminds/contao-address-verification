@@ -12,21 +12,24 @@ declare(strict_types=1);
 
 namespace InspiredMinds\ContaoAddressVerification\Controller\FrontendModule;
 
-use Contao\Controller;
 use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
 use Contao\CoreBundle\ServiceAnnotation\FrontendModule;
 use Contao\ModuleModel;
 use Contao\PageModel;
 use Contao\StringUtil;
 use Contao\Template;
+use FOS\HttpCache\ResponseTagger;
 use Haste\Form\Form;
 use InspiredMinds\ContaoAddressVerification\AddressVerifier;
+use InspiredMinds\ContaoAddressVerification\Controller\AddressController;
 use InspiredMinds\ContaoAddressVerification\Event\BuildAddressVerificationFormEvent;
 use InspiredMinds\ContaoAddressVerification\Model\AddressGroupModel;
 use InspiredMinds\ContaoAddressVerification\Model\AddressModel;
+use InspiredMinds\ContaoAddressVerification\ProcessAddressesTrait;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Terminal42\NodeBundle\NodeManager;
 
@@ -35,28 +38,37 @@ use Terminal42\NodeBundle\NodeManager;
  */
 class AddressVerificationController extends AbstractFrontendModuleController
 {
+    use ProcessAddressesTrait;
+
     public const TYPE = 'address_verification';
 
     private $eventDispatcher;
     private $nodeManager;
     private $verifier;
+    private $urlGenerator;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, NodeManager $nodeManager, AddressVerifier $verifier)
-    {
+    public function __construct(
+        EventDispatcherInterface $eventDispatcher,
+        NodeManager $nodeManager,
+        AddressVerifier $verifier,
+        UrlGeneratorInterface $urlGenerator
+    ) {
         $this->eventDispatcher = $eventDispatcher;
         $this->nodeManager = $nodeManager;
         $this->verifier = $verifier;
+        $this->urlGenerator = $urlGenerator;
     }
 
     protected function getResponse(Template $template, ModuleModel $module, Request $request): Response
     {
         $form = $this->buildForm($module, $request);
 
+        $addressGroupIds = array_map('\intval', StringUtil::deserialize($module->address_groups, true));
+
         if ($form->validate()) {
             $address = $form->getBoundModel();
             $this->setAddressSession($request, $address);
 
-            $addressGroupIds = array_map('\intval', StringUtil::deserialize($module->address_groups, true));
             $verified = $this->verifier->verify($address, $addressGroupIds, (bool) $module->address_country);
             $template->isVerified = $verified;
             $template->isUnverified = !$verified;
@@ -95,9 +107,15 @@ class AddressVerificationController extends AbstractFrontendModuleController
                 $template->groupNodesMeta = $groupNodesMeta;
             }
         } else {
+            $addresses = AddressModel::findByPids($addressGroupIds);
+
             $template->form = $form->generate('form_address_verification');
             $template->formId = $this->getFormId($module);
-            $template->addresses = $this->getAddresses($module);
+            $template->addresses = $this->processAddresses($addresses, (bool) $module->address_country);
+            $template->asyncUrl = $this->urlGenerator->generate(AddressController::class, ['module' => $module->id, '_locale' => $request->getLocale()]);
+
+            $this->tagResponse($addresses);
+            $this->tagResponse(array_map(static function ($id) { return 'contao.db.tl_address_group.'.$id; }, $addressGroupIds));
         }
 
         return new Response($template->parse());
@@ -135,38 +153,6 @@ class AddressVerificationController extends AbstractFrontendModuleController
     private function getFormId(ModuleModel $model): string
     {
         return 'address-verification-'.$model->id;
-    }
-
-    /**
-     * @return array<AddressModel>
-     */
-    private function getAddresses(ModuleModel $module): array
-    {
-        $addresses = AddressModel::findByPids(StringUtil::deserialize($module->address_groups, true));
-
-        if (null === $addresses) {
-            return [];
-        }
-
-        Controller::loadDataContainer('tl_address');
-        $dcaFields = $GLOBALS['TL_DCA']['tl_address']['fields'];
-
-        return array_map(
-            function (AddressModel $address) use ($dcaFields, $module) {
-                $row = $address->row();
-
-                foreach ($row as $key => $value) {
-                    if (empty($dcaFields[$key]['inputType'])) {
-                        unset($row[$key]);
-                    }
-                }
-
-                // Build a human readable address for the autocomplete selection
-                $row['address'] = $address->getReadableAddress((bool) $module->address_country);
-
-                return $row;
-            }, $addresses->getModels()
-        );
     }
 
     private function setAddressSession(Request $request, AddressModel $address): void
